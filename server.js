@@ -22,8 +22,8 @@ bot.hears("hi", ctx => ctx.reply("Hey there"));
 
 bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
   const q = inlineQuery.query;
-  console.log(q)
-  if (!q) return
+  console.log(q);
+  if (!q) return;
   let res = flypy.up(q);
   var results = [
     {

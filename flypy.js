@@ -15,16 +15,12 @@ function up(input) {
   let stack = "";
   let output = [];
   function lookup(word, w) {
-    if (!w) {
-      w = 1;
-    }
+    if (!w) w = 1;
     for (let x of flypy) {
       if (x[0] == word && x[1] == w) return x;
     }
-
     return ["", 0, ""];
   }
-
   function dealWithStack() {
     if (!stack) return;
     output.push(lookup(stack)[2]);
@@ -36,8 +32,6 @@ function up(input) {
   while (i > 0) {
     i = i - 1;
     var char = chars.shift();
-    //if (char) console.log(char);
-    //console.log(char);
     if (char === " " && allowMoreSpaces) {
       stack ? dealWithStack() : output.push(" ");
     } else if (stack.length == 4) {
@@ -66,4 +60,4 @@ function up(input) {
   return output.join("");
 }
 
-module.exports = {up}
+module.exports = { up };
