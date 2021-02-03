@@ -1,0 +1,3 @@
+h1. TelegrIME Bot
+
+一个 Telegram 小鹤双拼飞扬输入法 bot。
