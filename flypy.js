@@ -1,29 +1,42 @@
 const fs = require("fs");
 let flypy = fs.readFileSync("flypy.txt", "utf-8");
 flypy = flypy.split("\n"); //.splice(1, 55);
-flypy = flypy.map(x => {
+let dict = {};
+flypy.map(x => {
   x = x.split(",");
-  let a = x[0].split("=");
-  a[1] = Number(a[1]);
-  return a.concat(x[1]);
+  dict[x[0]] = x[1];
 });
 
+function lookup(word, w) {
+  if (!w) w = 1;
+  let res = dict[word + "=" + w];
+  return res ? res : word;
+}
+
+function parse(input) {
+  // parse '
+  let _input = input.split("'");
+  if (_input !== [input]) {
+    // 奇偶交替
+    let is_raw = true;
+    _input = _input.map(part => {
+      is_raw = !is_raw;
+      return is_raw ? part : up(part);
+    });
+    let res = _input.join("");
+    return res;
+  } else return input;
+}
 function up(input) {
   //let input = "xmzdu yyxu eewdd ksged,soyijiuiu do daf l ksge ye u m wftid.";
   input = input + " ";
   let chars = input.split("");
   let stack = "";
   let output = [];
-  function lookup(word, w) {
-    if (!w) w = 1;
-    for (let x of flypy) {
-      if (x[0] == word && x[1] == w) return x;
-    }
-    return ["", 0, ""];
-  }
+
   function dealWithStack() {
     if (!stack) return;
-    output.push(lookup(stack)[2]);
+    output.push(lookup(stack));
     stack = "";
   }
   const punctuations = (",./?<>~!'[{]}" + '"\\').split("");
@@ -53,6 +66,14 @@ function up(input) {
           dealWithStack();
           output.push("，");
           break;
+        case "!":
+          dealWithStack();
+          output.push("！");
+          break;
+        case "?":
+          dealWithStack();
+          output.push("？");
+          break;
       }
       //if (/(\.|,|\/)/.test(char)){
     }
@@ -60,4 +81,4 @@ function up(input) {
   return output.join("");
 }
 
-module.exports = { up };
+module.exports = { up, parse };

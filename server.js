@@ -24,7 +24,7 @@ bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
   const q = inlineQuery.query;
   console.log(q);
   if (!q) return;
-  let res = flypy.up(q);
+  let res = flypy.parse(q);
   var results = [
     {
       type: "article",
@@ -36,7 +36,8 @@ bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
       }
     }
   ];
-  return answerInlineQuery(results);
+  answerInlineQuery(results);
+  return;
 });
 
 bot.launch();
