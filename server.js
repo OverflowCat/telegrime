@@ -24,12 +24,16 @@ bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
   const q = inlineQuery.query;
   console.log(q);
   if (!q) return;
-  let res = flypy.parse(q);
+  let xres = flypy.xparse(q);
+  let res = xres[0];
   var results = [
     {
       type: "article",
       id: crc32(res),
-      title: "FLYPY",
+      title: xres[1] + "‸  " + xres[2],
+      thumb_url: "https://www.flypy.com/images/twxh.png",
+      thumb_width: 54,
+      thumb_height: 54,
       description: res,
       input_message_content: {
         message_text: res
