@@ -17,7 +17,6 @@ const bot = new Telegraf(process.env.TELEGRIME);
 
 bot.start(ctx => ctx.reply("Welcome"));
 bot.help(ctx => ctx.reply("Send me a sticker"));
-bot.on("sticker", ctx => ctx.reply("👍"));
 bot.hears("hi", ctx => ctx.reply("Hey there"));
 
 bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {

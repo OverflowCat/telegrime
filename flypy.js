@@ -56,6 +56,10 @@ function up(input) {
     console.log("==" + stack);
     if (!stack) return;
     lastcode = stack;
+    if (/[0-9]$/.test(stack)) {
+        let w = stack.charAt(stack.length-1);
+	stack = stack.replace(/[0-9]/, '');
+    }
     output.push(lookup(stack));
     stack = "";
   }
