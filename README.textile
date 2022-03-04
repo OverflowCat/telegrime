@@ -1,6 +1,0 @@
-h1. TelegrIME Bot
-
-一个 Telegram 小鹤双拼飞扬输入法 bot。
-
-!https://cdn.glitch.com/4e5d4348-b017-4921-942b-6b5b2bc60d2d%2F74fae49d-7117-4a32-a19d-9f9f9efe0bd8.image.png?v=1612359693082!
-
