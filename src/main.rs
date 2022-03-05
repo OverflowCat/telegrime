@@ -5,12 +5,20 @@ use teloxide::{
     },
     Bot,
 };
+
+use lazy_static::lazy_static;
+
 mod table;
+
+fn parse_long(text: &str) -> String {
+    String::from("")
+}
 
 #[tokio::main]
 async fn main() {
-    let mabiao = table::flypy().unwrap();
-
+    lazy_static! {
+        static ref MABIAO: table::Mabiao = table::flypy().unwrap();
+    }
     teloxide::enable_logging!();
     log::info!("Starting TelegrIMEbot v2...");
     // let token = env::var("TELEGRIME").expect("TELEGRIME bot token not found");
@@ -34,29 +42,25 @@ async fn main() {
         |query: InlineQuery, bot: AutoSend<Bot>| async move {
             // First, create your actual response
             let key = query.query.clone();
-            let res = match (&table).get(&(key, 1)) {
-                Some(value) => {
-                    value.clone()
-                },
-                None => {
-                    String::from("(空)")
-                }
+            let res = match (MABIAO.table).get(&(key, 1)) {
+                Some(value) => value.clone(),
+                None => String::from("(空)"),
             };
-            let google_search = InlineQueryResultArticle::new(
+            let article1 = InlineQueryResultArticle::new(
                 // Each item needs a unique ID, as well as the response container for the
                 // items. These can be whatever, as long as they don't
                 // conflict.
                 "01".to_string(),
                 // What the user will actually see
-                "1111",
+                query.query.clone(),
                 // What message will be sent when clicked/tapped
                 InputMessageContent::Text(InputMessageContentText::new(format!("{}", res,))),
-            );
+            ).description(format!("{}‸", res)).thumb_url(reqwest::Url::parse("http://telegra.ph/file/a8a78f809e7dcb1f11351.png").unwrap());
             // While constructing them from the struct itself is possible, it is preferred
             // to use the builder pattern if you wish to add more
             // information to your result. Please refer to the documentation
             // for more detailed information about each field. https://docs.rs/teloxide/latest/teloxide/types/struct.InlineQueryResultArticle.html
-            let ddg_search = InlineQueryResultArticle::new(
+/*             let ddg_search = InlineQueryResultArticle::new(
                 "02".to_string(),
                 "DuckDuckGo Search".to_string(),
                 InputMessageContent::Text(InputMessageContentText::new(format!(
@@ -70,11 +74,11 @@ async fn main() {
                     .parse()
                     .unwrap(),
             )
-            .url("https://duckduckgo.com/about".parse().unwrap()); // Note: This is the url that will open if they click the thumbnail
+            .url("https://duckduckgo.com/about".parse().unwrap()); // Note: This is the url that will open if they click the thumbnail */
 
             let results = vec![
-                InlineQueryResult::Article(google_search),
-                InlineQueryResult::Article(ddg_search),
+                InlineQueryResult::Article(article1),
+/*                 InlineQueryResult::Article(ddg_search), */
             ];
 
             // Send it off! One thing to note -- the ID we use here must be of the query
