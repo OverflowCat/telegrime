@@ -1,4 +1,3 @@
-use std::env;
 use teloxide::{
     prelude2::*,
     types::{
@@ -15,6 +14,7 @@ async fn main() {
     teloxide::enable_logging!();
     log::info!("Starting TelegrIMEbot v2...");
     // let token = env::var("TELEGRIME").expect("TELEGRIME bot token not found");
+    let token = "1502134572:xxxxxxxxxx";
     let proxy = reqwest::Proxy::all("http://127.0.0.1:11224").expect("Creating proxy");
     let client = reqwest::Client::builder()
         .proxy(proxy)
@@ -33,10 +33,14 @@ async fn main() {
     let handler = Update::filter_inline_query().branch(dptree::endpoint(
         |query: InlineQuery, bot: AutoSend<Bot>| async move {
             // First, create your actual response
-            let key = query.query;
-            let res = match mabiao.lookup(&(key, 1)) {
-                Some(value) => value,
-                None => "(空)",
+            let key = query.query.clone();
+            let res = match (&table).get(&(key, 1)) {
+                Some(value) => {
+                    value.clone()
+                },
+                None => {
+                    String::from("(空)")
+                }
             };
             let google_search = InlineQueryResultArticle::new(
                 // Each item needs a unique ID, as well as the response container for the
@@ -57,7 +61,7 @@ async fn main() {
                 "DuckDuckGo Search".to_string(),
                 InputMessageContent::Text(InputMessageContentText::new(format!(
                     "https://duckduckgo.com/?q={}",
-                    query.query
+                    query.query.clone()
                 ))),
             )
             .description("DuckDuckGo Search")

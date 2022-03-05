@@ -8,9 +8,9 @@ type EntryV = String;
 type TableMap = HashMap<EntryK, EntryV>;
 
 pub struct Mabiao {
-    code_length: u8,
-    count: u128,
-    table: TableMap,
+    pub code_length: u8,
+    pub count: u128,
+    pub table: TableMap,
 }
 
 impl Mabiao {
@@ -21,9 +21,9 @@ impl Mabiao {
             table,
         }
     }
-    pub fn lookup(&self, key: &EntryK) -> Option<&EntryV> {
+/*     pub fn lookup(&self, key: &EntryK) -> Option<&EntryV> {
         self.table.get(key)
-    }
+    } */
 }
 
 impl std::fmt::Debug for Mabiao {
@@ -38,7 +38,7 @@ impl std::fmt::Debug for Mabiao {
 
 pub fn flypy() -> Result<Mabiao, io::Error> {
     println!("Hello, world!");
-    let result = read_from_file("../assets/flypy.txt")?;
+    let result = read_from_file("assets/flypy.txt")?;
     Ok(result)
 }
 
@@ -70,7 +70,7 @@ fn read_from_file(path: &str) -> io::Result<Mabiao> {
             None => {}
         }
     }
-    println!("{:?}", codes);
+    // println!("{:?}", codes);
     Ok(Mabiao {
         code_length: 4,
         count: counter,
