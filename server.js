@@ -15,8 +15,8 @@ const { Telegraf } = require("telegraf");
 
 const bot = new Telegraf(process.env.TELEGRIME);
 
-bot.start(ctx => ctx.reply("Welcome"));
-bot.help(ctx => ctx.reply("Send me a sticker"));
+bot.start(ctx => ctx.reply("请使用 inline 模式进行输入"));
+bot.help(ctx => ctx.reply("请使用 inline 模式进行输入"));
 bot.hears("hi", ctx => ctx.reply("Hey there"));
 
 bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {

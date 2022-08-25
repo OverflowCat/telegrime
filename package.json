@@ -10,7 +10,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "telegraf": "^3.38.0"
+    "telegraf": "^3.x"
   },
   "engines": {
     "node": "12.x"

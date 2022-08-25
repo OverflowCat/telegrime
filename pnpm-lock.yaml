@@ -1,15 +1,15 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
-  telegraf: ^3.38.0
+  telegraf: ^3.x
 
 dependencies:
-  telegraf: 3.39.0
+  telegraf: 3.40.0
 
 packages:
 
-  /debug/4.3.3:
-    resolution: {integrity: sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q==}
+  /debug/4.3.4:
+    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -20,8 +20,8 @@ packages:
       ms: 2.1.2
     dev: false
 
-  /minimist/1.2.5:
-    resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
+  /minimist/1.2.6:
+    resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: false
 
   /module-alias/2.2.2:
@@ -49,36 +49,36 @@ packages:
     engines: {node: '>= 0.10'}
     dev: false
 
-  /telegraf/3.39.0:
-    resolution: {integrity: sha512-6u5UyW2KpMS/hwC4DKLGlicK/rVSYCahPFgF14ioP6BzwcDwQlciHCB/oWguvxLJaYGrvY6crzLHfjupFTBPXw==}
-    engines: {node: '>=8'}
+  /telegraf/3.40.0:
+    resolution: {integrity: sha512-wulVjRHrX2zQwbk1/jzg3Ll9Kr0xC7ofXsRPJgcV2yoCFx5oSU41ZaDKNRPsLhjXxW4s9iNM2S2N/ESyiZxTMQ==}
+    engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      debug: 4.3.3
-      minimist: 1.2.5
+      debug: 4.3.4
+      minimist: 1.2.6
       module-alias: 2.2.2
       node-fetch: 2.6.7
       sandwich-stream: 2.0.2
-      typegram: 3.8.0
+      typegram: 3.10.0
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
   /tr46/0.0.3:
-    resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
+    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
     dev: false
 
-  /typegram/3.8.0:
-    resolution: {integrity: sha512-MdlbWu0HfmgFJf4+xj6eqGYuanV2LJxBYTzLrD0kTV+woQ5dxDD2k8UVVjYnbBGkAagAyxzQevPiFZRWLFHSBw==}
+  /typegram/3.10.0:
+    resolution: {integrity: sha512-kma7ZF7SFRqcUCgo5sHg1MbPwc9/KYjVkbvrqIZK7oXfPdLBGz1s7wF9d7o4yjHp+AOGke8cyYGhI/+4xYYC4Q==}
     dev: false
 
   /webidl-conversions/3.0.1:
-    resolution: {integrity: sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=}
+    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
     dev: false
 
   /whatwg-url/5.0.0:
-    resolution: {integrity: sha1-lmRU6HZUYuN2RNNib2dCzotwll0=}
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1

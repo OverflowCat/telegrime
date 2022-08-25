@@ -46,7 +46,6 @@ function lookupAll(code, formatting) {
 }
 
 function up(input) {
-  //let input = "xmzdu yyxu eewdd ksged,soyijiuiu do daf l ksge ye u m wftid.";
   input = input + "␃";
   let chars = input.split("");
   let stack = "";
@@ -56,29 +55,34 @@ function up(input) {
     console.log("==" + stack);
     if (!stack) return;
     lastcode = stack;
-    if (/[0-9]$/.test(stack)) {
-        let w = stack.charAt(stack.length-1);
-	stack = stack.replace(/[0-9]/, '');
-    }
-    output.push(lookup(stack));
+    output.push(
+      /[0-9]$/.test(stack) ?
+        lookup(stack.slice(0, -1), stack.charAt(stack.length - 1)) : lookup(stack));
     stack = "";
   }
+
   const punctuations = (",./?<>~!'[{]}" + '"\\').split("");
-  let allowMoreSpaces = true;
+  let allowMoreSpaces = false;
   let i = chars.length;
   while (i > 0) {
-    /*if (stack.length == 4) {
-      dealWithStack();
-      stack = "";
-    }*/
     i = i - 1;
     var char = chars.shift();
     //console.log(char);
     let puncflag = false;
+    console.log({ char, stack });
     if ((char === " " && allowMoreSpaces) || char === "␃") {
       if (stack) dealWithStack();
     } else if (char === " " && !allowMoreSpaces) {
+      console.info('空格', { stack })
       stack ? dealWithStack() : output.push(" ");
+    } else if (/^[0-9]$/.test(char)) {
+      console.info("带数字的长度 < 4 的码", { char, stack });
+      if (stack) {
+        stack += char;
+        dealWithStack();
+      } else {
+        output += char;
+      }
     } else if (/* puncflag!= false && */ punctuations.indexOf(char) != -1) {
       /* if (puncflag === 1) stack = "";
       else */ dealWithStack();
@@ -98,13 +102,22 @@ function up(input) {
       }
       stack = "";
       //if (/(\.|,|\/)/.test(char)){
-    } 
+    }
     else if (stack.length == 4) {
-      dealWithStack();
-      stack = char;
+      console.log("stack length is 4", { char, stack })
+      if (/^[0-9]$/.test(char)) {
+        console.log({ char }, "is ^[0-9]$")
+        stack += char;
+        dealWithStack();
+      }
+      else {
+        dealWithStack();
+        stack = char;
+      }
       let puncflag = 1;
     } else if (/[a-z]/.test(char)) {
-      stack = stack + char;
+      console.log("char is [a-z]", { char, stack });
+      stack += char;
     } else if (/[A-Z]/.test(char)) {
       stack ? dealWithStack() : output.push(char);
     } else {
