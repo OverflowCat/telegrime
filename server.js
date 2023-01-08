@@ -35,11 +35,13 @@ bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
       thumb_height: 54,
       description: res,
       input_message_content: {
-        message_text: res
+	  message_text: res ? res : "…"
       }
     }
   ];
-  answerInlineQuery(results);
+  try {
+    answerInlineQuery(results);
+  } catch (e) {}
   return;
 });
 
