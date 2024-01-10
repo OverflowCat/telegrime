@@ -18,7 +18,7 @@ function lookup(word, w) {
 function parse(input) {
   // parse '
   let _input = input.split("'");
-  if (_input !== [input]) {
+  if (_input != [input]) {
     // 奇偶交替
     let is_raw = true;
     _input = _input.map(part => {

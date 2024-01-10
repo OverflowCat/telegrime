@@ -13,7 +13,7 @@
     "telegraf": "^3.x"
   },
   "engines": {
-    "node": "16"
+    "node": ">=16.0"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/telegrime"
