@@ -23,36 +23,56 @@ bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
   const q = inlineQuery.query;
   console.log(q);
   if (!q) return;
-  let flypy_result = flypy.xparse(q);
-  let flypy_first_result = flypy_result[0];
-  let tiger_result = tiger.xparse(q);
-  let tiger_first_result = tiger_result[0];
-  const results = [
-    {
-      type: "article",
-      id: crc32(flypy_first_result),
-      title: flypy_result[1] + "‸  " + flypy_result[2],
-      thumb_url: "https://www.flypy.com/images/twxh.png",
-      thumb_width: 54,
-      thumb_height: 54,
-      description: flypy_first_result,
-      input_message_content: {
-        message_text: flypy_first_result ? flypy_first_result : "…"
-      },
-    },
-    {
-      type: "article",
-      id: crc32("tiger" + tiger_first_result),
-      title: tiger_result[1] + "‸  " + tiger_result[2],
-      thumb_url: "https://tiger-code.com/images/brand.png",
-      thumb_width: 54,
-      thumb_height: 28,
-      description: tiger_first_result,
-      input_message_content: {
-        message_text: tiger_first_result ? tiger_first_result : "…"
+  if (/[\u4E00-\u9FCC\u3400-\u4DB5\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\ud840-\ud868][\udc00-\udfff]|\ud869[\udc00-\uded6\udf00-\udfff]|[\ud86a-\ud86c][\udc00-\udfff]|\ud86d[\udc00-\udf34\udf40-\udfff]|\ud86e[\udc00-\udc1d]/.test(q)) {
+    // 单个汉字
+    let flypy_result = flypy.反查(q);
+    var results = [
+      {
+        type: "article",
+        id: crc32(q + flypy_result),
+        title: q + ": " + flypy_result,
+        thumb_url: "https://www.flypy.com/images/twxh.png",
+        thumb_width: 54,
+        thumb_height: 54,
+        description: flypy_result,
+        input_message_content: {
+          message_text: flypy_result ? flypy_result : "…"
+        },
       }
-    }
-  ];
+    ]
+  }
+  else {
+    let flypy_result = flypy.xparse(q);
+    let flypy_first_result = flypy_result[0];
+    let tiger_result = tiger.xparse(q);
+    let tiger_first_result = tiger_result[0];
+    var results = [
+      {
+        type: "article",
+        id: crc32(flypy_first_result),
+        title: flypy_result[1] + "‸  " + flypy_result[2],
+        thumb_url: "https://www.flypy.com/images/twxh.png",
+        thumb_width: 54,
+        thumb_height: 54,
+        description: flypy_first_result,
+        input_message_content: {
+          message_text: flypy_first_result ? flypy_first_result : "…"
+        },
+      },
+      {
+        type: "article",
+        id: crc32("tiger" + tiger_first_result),
+        title: tiger_result[1] + "‸  " + tiger_result[2],
+        thumb_url: "https://tiger-code.com/images/brand.png",
+        thumb_width: 54,
+        thumb_height: 28,
+        description: tiger_first_result,
+        input_message_content: {
+          message_text: tiger_first_result ? tiger_first_result : "…"
+        }
+      }
+    ];
+  }
   try {
     await answerInlineQuery(results);
   } catch (e) { }

@@ -2,10 +2,16 @@ const fs = require("fs");
 let flypy = fs.readFileSync("flypy.txt", "utf-8");
 flypy = flypy.split("\n"); //.splice(1, 55);
 let dict = {};
+let reverseDict = new Map();
 flypy.map(x => {
   x = x.split(",");
   dict[x[0]] = x[1];
+  reverseDict.set(x[1], x[0]);
 });
+
+function 反查(ma) {
+  return reverseDict.get(ma);
+}
 
 let lastcode,
   hzxr = "";
@@ -130,4 +136,4 @@ function up(input) {
   return output.join("");
 }
 
-module.exports = { up, parse, xparse };
+module.exports = { up, parse, xparse, 反查 };
