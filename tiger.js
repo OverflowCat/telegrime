@@ -1,9 +1,10 @@
 const fs = require("fs");
-var tiger = fs.readFileSync("tiger.txt", "utf-8");
+var tiger = fs.readFileSync("tiger-full.txt", "utf-8");
 tiger = tiger.split("\r\n");
+tiger.pop(0);
 let dict = new Map();
 tiger.map(x => {
-    const [code, word] = x.split("\t");
+    const [code, word, ...rest] = x.trim().split("\t");
     const dictItem = dict.get(word);
     dictItem ? dictItem.push(code) : dict.set(word, [code]);
 });
