@@ -9,6 +9,20 @@ flypy.map(x => {
   reverseDict.set(x[1], x[0]);
 });
 
+// libre
+flypy = fs.readFileSync("libre-flypy.txt", "utf-8");
+flypy = flypy.split("\n");
+flypy.map(x => {
+    x = x.trim().split('\t');
+    const [zi, ma] = x;
+    if (reverseDict.has(ma)) return;
+    let i = 1;
+    while (dict[zi + "=" + i]) i++;
+    dict[ma + "=" + i] = zi;
+  }
+)
+flypy = null;
+
 function 反查(ma) {
   return reverseDict.get(ma);
 }
