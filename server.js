@@ -19,7 +19,8 @@ const bot = new Telegraf(process.env.TELEGRIME);
 bot.start(ctx => ctx.reply("我是一个支持小鹤音形和虎码输入的机器人。请使用 inline 模式进行输入。"));
 bot.help(ctx => ctx.reply("我是一个支持小鹤音形和虎码输入的机器人。请使用 inline 模式进行输入。"));
 
-bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
+bot.on("inline_query", async (ctx) => {
+  const { inlineQuery } = ctx;
   const q = inlineQuery.query;
   console.log(q);
   if (!q) return;
@@ -74,8 +75,10 @@ bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
     ];
   }
   try {
-    await answerInlineQuery(results);
-  } catch (e) { }
+    return ctx.answerInlineQuery(results);
+  } catch (e) { 
+    console.warn(e);
+  }
   return;
 });
 

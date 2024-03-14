@@ -1,16 +1,13 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
   "name": "telegrime",
-  "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "version": "2.1.0",
+  "description": "A Telegram bot that helps you type Chinese.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "telegraf": "^3.x"
+    "telegraf": "^4.x"
   },
   "engines": {
     "node": ">=16.0"
@@ -21,7 +18,9 @@
   "license": "MIT",
   "keywords": [
     "node",
-    "glitch",
-    "express"
+    "telegram",
+    "flypy"
   ]
 }
+
+
