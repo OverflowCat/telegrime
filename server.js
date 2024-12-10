@@ -11,6 +11,7 @@ var crc32 = function (r) {
 
 const flypy = require("./flypy");
 const tiger = require("./tiger");
+const neko = require("./hananeko");
 
 const { Telegraf } = require("telegraf");
 
@@ -47,6 +48,9 @@ bot.on("inline_query", async (ctx) => {
     let flypy_first_result = flypy_result[0];
     let tiger_result = tiger.xparse(q);
     let tiger_first_result = tiger_result[0];
+    let neko_result = neko.xparse(q);
+    let neko_first_result = neko_result[0];
+
     var results = [
       {
         type: "article",
@@ -59,6 +63,18 @@ bot.on("inline_query", async (ctx) => {
         input_message_content: {
           message_text: flypy_first_result ? flypy_first_result : "…"
         },
+      },
+      {
+        type: "article",
+        id: crc32("neko" + neko_first_result),
+        title: tiger_result[1] + "‸  " + tiger_result[2],
+        thumb_url: "https://tiger-code.com/images/brand.png",
+        thumb_width: 54,
+        thumb_height: 28,
+        description: neko_first_result,
+        input_message_content: {
+          message_text: neko_first_result ? neko_first_result : "…"
+        }
       },
       {
         type: "article",
