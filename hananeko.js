@@ -1,5 +1,5 @@
 const fs = require("fs");
-var tiger = fs.readFileSync("tiger-full.txt", "utf-8");
+var tiger = fs.readFileSync("tiger-ja.txt", "utf-8");
 tiger = tiger.split("\r\n");
 tiger.pop(0);
 let dict = new Map();

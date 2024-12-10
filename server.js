@@ -67,7 +67,7 @@ bot.on("inline_query", async (ctx) => {
       {
         type: "article",
         id: crc32("neko" + neko_first_result),
-        title: tiger_result[1] + "‸  " + tiger_result[2],
+        title: neko_result[1] + "‸  " + neko_result[2],
         thumb_url: "https://tiger-code.com/images/brand.png",
         thumb_width: 54,
         thumb_height: 28,
@@ -91,7 +91,7 @@ bot.on("inline_query", async (ctx) => {
     ];
   }
   try {
-    return ctx.answerInlineQuery(results);
+    return await ctx.answerInlineQuery(results);
   } catch (e) { 
     console.warn(e);
   }
