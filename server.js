@@ -98,4 +98,36 @@ bot.on("inline_query", async (ctx) => {
   return;
 });
 
+bot.command('flypy', async (ctx) => {
+  const text = ctx.message.text.split(' ').slice(1).join(' ');
+  if (!text) {
+    return ctx.reply('请在命令后输入要查询的内容');
+  }
+  const flypy_result = flypy.xparse(text);
+  const flypy_first_result = flypy_result[0];
+  return ctx.reply(flypy_first_result || '未找到结果');
+});
+
+bot.command('tiger', async (ctx) => {
+  const text = ctx.message.text.split(' ').slice(1).join(' ');
+  if (!text) {
+    return ctx.reply('请在命令后输入要查询的内容');
+  }
+  const tiger_result = tiger.xparse(text);
+  const tiger_first_result = tiger_result[0];
+  return ctx.reply(tiger_first_result || '未找到结果');
+});
+
+bot.command('tora', async (ctx) => {
+  const text = ctx.message.text.split(' ').slice(1).join(' ');
+  if (!text) {
+    return ctx.reply('请在命令后输入要查询的内容');
+  }
+  const neko_result = neko.xparse(text);
+  const neko_first_result = neko_result[0];
+  return ctx.reply(neko_first_result || '未找到结果');
+});
+
+
+
 bot.launch();
